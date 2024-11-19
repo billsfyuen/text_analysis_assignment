@@ -1,11 +1,19 @@
+import os
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
-import nltk
 
-nltk.download('punkt')
-nltk.download('punkt_tab')
-nltk.download('stopwords')
+project_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "backend", "nltk_data")
+
+if not os.path.exists(project_path):
+    os.makedirs(project_path)
+
+nltk.data.path.append(project_path)
+
+nltk.download('punkt', download_dir=project_path)
+nltk.download('punkt_tab', download_dir=project_path)
+nltk.download('stopwords', download_dir=project_path)
 
 stop_words = set(stopwords.words('english'))
 
