@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
 
-project_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "backend", "nltk_data")
+project_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "nltk_data")
 
 if not os.path.exists(project_path):
     os.makedirs(project_path)

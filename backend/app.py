@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from keyword_extraction import extract_keywords
-from text_summarization import summarize_text
-from topic_classification import classify_topic
+from helpers.keyword_extraction import extract_keywords
+from helpers.text_summarization import summarize_text
+from helpers.topic_classification import classify_topic
 
 app = Flask(__name__)
 CORS(app)
@@ -11,7 +11,8 @@ CORS(app)
 def api_extract_keywords():
     data = request.json
     text = data['text']
-    keywords = extract_keywords(text)
+    num_keywords = data['num_keywords']
+    keywords = extract_keywords(text, num_keywords)
     return jsonify({'keywords': keywords})
 
 @app.route('/summarize_text', methods=['POST'])
