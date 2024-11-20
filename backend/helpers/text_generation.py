@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 # Language model from Replicate
 # meta/meta-llama-3-8b-instruct
 
+load_dotenv();
+
 replicate.api = os.getenv('REPLICATE_API_TOKEN')
 
 if replicate.api is None:
