@@ -1,0 +1,9 @@
+Flask
+transformers
+tensorflow
+Werkzeug
+replicate
+torch
+nltk
+python-dotenv
+tf-keras
