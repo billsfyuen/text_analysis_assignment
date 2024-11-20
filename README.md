@@ -30,9 +30,10 @@ This is a code assignment developed by Bill YUEN for a job interview.
    source .venv/bin/activate  # On Windows, use `.venv\\Scripts\\activate`
    ```
 
-3. Install the required packages:
+3. Install the required packages (and platform-specific packages):
 
    ```
+   pip install tensorflow tf-keras transformers
    pip install -r requirements.txt
    ```
 

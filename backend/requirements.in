@@ -1,11 +1,6 @@
 Flask
 flask-cors
-transformers
-tensorflow
-Werkzeug
 replicate
-torch
 nltk
 python-dotenv
-tf-keras
 pip-tools

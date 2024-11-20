@@ -5,12 +5,20 @@ from dotenv import load_dotenv
 # Language model from Replicate
 # meta/meta-llama-3-8b-instruct
 
-load_dotenv();
+load_dotenv()
 
 replicate.api = os.getenv('REPLICATE_API_TOKEN')
 
 if replicate.api is None:
-    raise ValueError("Repliate Token missing")
+    warning_message = (
+        "\n"
+        "*****************************\n"
+        "****** [WARNING] ******\n"
+        "Replicate API Token is missing!\n"
+        "API calls may fail.\n"
+        "*****************************\n"
+    )
+    print(warning_message)
 
 def generate_text(prompt):
     input = {
