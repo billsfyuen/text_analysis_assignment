@@ -12,7 +12,7 @@ CORS(app)
 def api_extract_keywords():
     """
     API endpoint to extract keywords from the provided text.
-    Expects a JSON payload with 'text' and 'num_keywords'.
+    Expects a JSON payload with 'text'.
     Returns a JSON object containing the extracted keywords.
     """
     data = request.json

@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Text Analysis Assignment
 
-## Getting Started
+This is a code assignment developed by Bill YUEN for a job interview.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Keyword Extraction: Identifies and extracts the most important keywords or phrases from a text.
+- Text Summarization: Generates a concise summary of a longer text.
+- Topic Classification: Categorizes the text into predefined topics (e.g. sports, politics, technology, entertainment).
+
+## Project Structure
+
+1. Backend (Python/Flask)
+2. Frontend (Next.js)
+
+## Setup and Installation
+
+### Backend
+
+1. Navigate to the `backend` directory:
+
+   ```
+   cd backend
+   ```
+
+2. Create a virtual environment and activate it:
+
+   ```
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows, use `.venv\\Scripts\\activate`
+   ```
+
+3. Install the required packages:
+
+   ```
+   pip install -r requirements.txt
+   ```
+
+4. Run the Flask application:
+   ```
+   python app.py
+   ```
+
+The backend server will start running on `http://127.0.0.1:5000`.
+
+### Frontend
+
+1. Navigate to the `frontend` directory:
+
+   ```
+   cd frontend
+   ```
+
+2. Install the required packages:
+
+   ```
+   npm install
+   ```
+
+3. Run the development server:
+   ```
+   npm run dev
+   ```
+
+The frontend will be accessible at `http://localhost:3000`.
+
+## Usage
+
+1. Open your web browser and go to `http://localhost:3000`.
+2. Choose an analyzing option.
+3. Enter the text you want to analyze in the provided text area and click the button.
+4. The system will display the extracted keywords, text summary, and classified topic.
+
+## Customization
+
+1. The number of keywords (for Keyword Extraction) and the list of predefined topics (for Topic Classification) can be customized
+2. Simply make updates in `backend/helpers/customize.py`
+
+## Additional Information
+
+1. Models from Hugging Face and Replicate are utilized in this project. You need to connect to the internet while using it.
+
+2. Set up a .env file in the project root to use the required API token. In the .env file, include the following line:
+
+```
+REPLICATE_API_TOKEN=your_secret_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Make sure to replace `your_secret_key` with your actual API token.

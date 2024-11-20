@@ -40,7 +40,6 @@ def extract_keywords(text):
 
     Parameters:
     - text (str): The input text to analyze.
-    - num_keywords (int): The number of top keywords to return (default is 5).
 
     Returns:
     - List[str]: A list of the most common keywords.
