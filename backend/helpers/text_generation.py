@@ -2,7 +2,13 @@ import os
 import replicate
 from dotenv import load_dotenv
 
+# Language model from Replicate
+# meta/meta-llama-3-8b-instruct
+
 replicate.api = os.getenv('REPLICATE_API_TOKEN')
+
+if replicate.api is None:
+    raise ValueError("Repliate Token missing")
 
 def generate_text(prompt):
     input = {
@@ -12,8 +18,12 @@ def generate_text(prompt):
         "prompt_template": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n{system_prompt}<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
     }
 
-    output = replicate.run(
-        "meta/meta-llama-3-8b-instruct",
-        input=input
-    )
-    return ("".join(output))
+    try:
+        output = replicate.run(
+            "meta/meta-llama-3-8b-instruct",
+            input=input
+        )
+        return ("".join(output))
+    except Exception as e:
+        print(f"Error: {e}")
+        raise
