@@ -9,27 +9,50 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function KeywordExtraction() {
   const [text, setText] = useState("");
   const [keywords, setKeywords] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+    setKeywords([]);
+
+    if (text.trim() === "") {
+      setError("Please enter some text before extracting keywords.");
+      return;
+    }
+
     setIsLoading(true);
 
-    const response = await fetch("/api/extract_keywords", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ text }),
-    });
+    try {
+      const response = await fetch("http://127.0.0.1:5000/extract_keywords", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text }),
+      });
 
-    const data = await response.json();
-    setKeywords(data.keywords);
-    setIsLoading(false);
+      if (!response.ok) {
+        throw new Error("Failed to extract keywords. Please try again");
+      }
+
+      const data = await response.json();
+      setKeywords(data.keywords);
+    } catch (error) {
+      setError(
+        error instanceof Error
+          ? error.message
+          : "An error occurred. Please try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -47,6 +70,11 @@ export default function KeywordExtraction() {
             rows={10}
             className="mb-4"
           />
+          {error && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
           <Button type="submit" disabled={isLoading}>
             {isLoading ? "Extracting..." : "Extract Keywords"}
           </Button>

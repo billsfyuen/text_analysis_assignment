@@ -1,4 +1,4 @@
-from .topics import TOPICS
+from .customize import TOPICS
 from .text_generation import generate_text
 
 def prompt_constructor(topics, text):

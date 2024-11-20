@@ -3,6 +3,7 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
+from .customize import NUM_KEYWORDS
 
 # Define the path to the nltk_data directory
 # Downloaded data will be stored in project directory
@@ -33,7 +34,7 @@ download_nltk_data()
 
 stop_words = set(stopwords.words('english'))
 
-def extract_keywords(text, num_keywords=5):
+def extract_keywords(text):
     """
     Extract the most common keywords from the input text.
 
@@ -49,7 +50,7 @@ def extract_keywords(text, num_keywords=5):
         # Filter out non-alphanumeric words and stop words
         words = [word for word in words if word.isalnum() and word not in stop_words]
         freq_dist = FreqDist(words)
-        return [word for word, _ in freq_dist.most_common(num_keywords)]
+        return [word for word, _ in freq_dist.most_common(NUM_KEYWORDS)]
     except Exception as e:
         print(f"Error extracting keywords: {e}")
         raise

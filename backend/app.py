@@ -17,19 +17,15 @@ def api_extract_keywords():
     """
     data = request.json
     
-    if not data or 'text' not in data or 'num_keywords' not in data:
+    if not data or 'text' not in data:
         return jsonify({'error': 'Invalid input.'}), 400
     
     text = data['text']
-    num_keywords = data['num_keywords']
-    
-    if not isinstance(num_keywords, int) or num_keywords <= 0:
-        return jsonify({'error': 'num_keywords must be positive'}), 400
     
     if not isinstance(text, str) or not text.strip():
         return jsonify({'error': 'text must be non-empty'}), 400
     
-    keywords = extract_keywords(text, num_keywords)
+    keywords = extract_keywords(text)
     return jsonify({'keywords': keywords})
 
 @app.route('/summarize_text', methods=['POST'])
