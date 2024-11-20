@@ -1,20 +1,18 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.pipeline import Pipeline
+from .topics import TOPICS
+from .text_generation import generate_text
 
-topics = ['sports', 'politics', 'technology', 'entertainment']
-X = [
-    "The team scored a goal in the final minute of the match.",
-    "The president signed a new bill into law yesterday.",
-    "The new smartphone features an advanced AI chip.",
-    "The movie won several awards at the festival."
-]
-y = topics
-
+def prompt_constructor(topics, text):
+    topic_string = ', '.join(topics)
+    prompt = (
+        f"Identify the relevant topic for the following text. Provide only the topic without any additional information.\n\n"
+        f"Choose from: {topic_string}\n\n"
+        f"Text: \"{text}\""
+    )
+    return prompt
+    
 def classify_topic(text):
-    model = Pipeline([
-        ('tfidf', TfidfVectorizer()),
-        ('clf', MultinomialNB()),
-    ])
-    model.fit(X, y)
-    return model.predict([text])[0]
+
+    prompt = prompt_constructor(TOPICS, text)
+    topic = generate_text(prompt)
+
+    return topic

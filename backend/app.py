@@ -5,7 +5,6 @@ from helpers.text_summarization import summarize_text
 from helpers.topic_classification import classify_topic
 from helpers.text_generation import generate_text
 
-
 app = Flask(__name__)
 CORS(app)
 
