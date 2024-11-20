@@ -1,4 +1,5 @@
 Flask
+flask-cors
 transformers
 tensorflow
 Werkzeug
@@ -7,3 +8,4 @@ torch
 nltk
 python-dotenv
 tf-keras
+pip-tools
