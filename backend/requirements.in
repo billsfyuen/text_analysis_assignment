@@ -1,6 +1,7 @@
 Flask
 flask-cors
 replicate
+scikit-learn
 nltk
 python-dotenv
 pip-tools

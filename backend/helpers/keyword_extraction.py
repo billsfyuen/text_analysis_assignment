@@ -2,7 +2,7 @@ import os
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-from nltk.probability import FreqDist
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Define the path to the nltk_data directory
 # Downloaded data will be stored in project directory
@@ -19,8 +19,6 @@ nltk.data.path.append(project_path)
 
 def download_nltk_data():
     try:
-        nltk.download('averaged_perceptron_tagger', download_dir=project_path)
-        nltk.download('maxent_ne_chunker', download_dir=project_path)
         nltk.download('words', download_dir=project_path)
         nltk.download('punkt', download_dir=project_path)
         nltk.download('punkt_tab', download_dir=project_path)
@@ -31,9 +29,7 @@ def download_nltk_data():
     
 download_nltk_data()
 
-stop_words = set(stopwords.words('english'))
-
-def extract_keywords(text, num_keywords=5):
+def extract_keywords(text, num_keywords):
     """
     Extract the most common keywords from the input text.
 
@@ -44,11 +40,28 @@ def extract_keywords(text, num_keywords=5):
     - List[str]: A list of the most common keywords.
     """
     try: 
-        words = word_tokenize(text.lower())
-        # Filter out non-alphanumeric words and stop words
-        words = [word for word in words if word.isalnum() and word not in stop_words]
-        freq_dist = FreqDist(words)
-        return [word for word, _ in freq_dist.most_common(num_keywords)]
+        tokenized_words = word_tokenize(text.lower())
+        
+        # Remove stopwords and non-alphabetic words
+        stop_words = set(stopwords.words('english'))
+        tokenized_words = [word for word in tokenized_words if word.isalpha() and word not in stop_words]
+        cleaned_text = ' '.join(tokenized_words)
+        
+        # Get feature words, TF-IDF scores using TF-IDF vectorizer
+        vectorizer = TfidfVectorizer()
+        tfidf_matrix = vectorizer.fit_transform([cleaned_text])
+        feature_words = vectorizer.get_feature_names_out()
+        tfidf_scores = tfidf_matrix.toarray()[0]
+        
+        # Create (word, score) tuples
+        word_scores = list(zip(feature_words, tfidf_scores))
+        
+        # Sort by score in descending order and get top keywords
+        sorted_word_scores = sorted(word_scores, key=lambda x: x[1], reverse=True)
+        keywords = [word for word, score in sorted_word_scores[:num_keywords]]
+    
+        return keywords
+        
     except Exception as e:
         print(f"Error extracting keywords: {e}")
         raise
