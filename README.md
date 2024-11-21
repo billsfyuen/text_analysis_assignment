@@ -52,7 +52,7 @@ The program will still run without the API token, but some features may not func
 3. Install the required packages (and platform-specific packages):
 
    ```
-   pip install tensorflow tf-keras transformers
+   pip install tensorflow tf-keras transformers scikit-learn
    pip install -r requirements.txt
    ```
 
