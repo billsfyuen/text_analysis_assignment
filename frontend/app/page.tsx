@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Head from "next/head";
 import KeywordExtraction from "@/components/KeywordExtraction";
 import TextSummarization from "@/components/TextSummarization";
 import TopicClassification from "@/components/TopicClassification";
@@ -34,11 +33,6 @@ export default function Home() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Head>
-        <title>AI Text Analysis System</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">

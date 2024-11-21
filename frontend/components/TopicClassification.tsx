@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -12,10 +12,30 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export default function TopicClassification() {
-  const [text, setText] = useState("");
-  const [topic, setTopic] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState<string>("");
+  const [topic, setTopic] = useState<string>("");
+  const [predefinedTopics, setPredefinedTopics] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    const fetchTopics = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/get_topics");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch topics");
+        }
+
+        const data = await response.json();
+        setPredefinedTopics(data.topics);
+      } catch (error) {
+        setError("An error occurred. Please try again.");
+      }
+    };
+
+    fetchTopics();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,6 +82,14 @@ export default function TopicClassification() {
         <CardDescription>Classify the topic of your text</CardDescription>
       </CardHeader>
       <CardContent>
+        {predefinedTopics.length > 0 && (
+          <div className="mb-4">
+            <h3 className="text-sm font-semibold mb-2">Predefined Topics:</h3>
+            <p className="text-sm text-muted-foreground">
+              {predefinedTopics.join(", ")}
+            </p>
+          </div>
+        )}
         <form onSubmit={handleSubmit}>
           <Textarea
             value={text}

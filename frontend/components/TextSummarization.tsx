@@ -13,9 +13,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2 } from "lucide-react";
 
 export default function TextSummarization() {
-  const [text, setText] = useState("");
-  const [summary, setSummary] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [text, setText] = useState<string>("");
+  const [summary, setSummary] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {

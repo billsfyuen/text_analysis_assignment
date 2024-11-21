@@ -20,10 +20,10 @@ import {
 import { Label } from "@/components/ui/label";
 
 export default function KeywordExtraction() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState<string>("");
   const [keywords, setKeywords] = useState<string[]>([]);
-  const [numKeywords, setNumKeywords] = useState(5);
-  const [isLoading, setIsLoading] = useState(false);
+  const [numKeywords, setNumKeywords] = useState<number>(5);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
