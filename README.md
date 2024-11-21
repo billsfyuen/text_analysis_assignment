@@ -93,5 +93,5 @@ The frontend will be accessible at `http://localhost:3000`.
 
 ## Customization
 
-1. The number of keywords (for Keyword Extraction) and the list of predefined topics (for Topic Classification) can be customized
+1. The list of predefined topics (for Topic Classification) can be customized.
 2. Simply make updates in `backend/helpers/customize.py`.
