@@ -21,6 +21,9 @@ if replicate.api is None:
     print(warning_message)
 
 def generate_text(prompt):
+    if replicate.api is None:
+        return "Replicate API Token is missing or invalid!"
+    
     input = {
         "prompt": prompt,
         "max_new_tokens": 512,
