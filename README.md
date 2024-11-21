@@ -19,17 +19,17 @@ This is a coding assignment developed by Bill YUEN for a job interview.
 
 1. Clone the project from Github
 
-```
-git clone git@github.com:billsfyuen/text_analysis_assignment.git
-```
+   ```
+   git clone git@github.com:billsfyuen/text_analysis_assignment.git
+   ```
 
 2. Models from [Hugging Face](https://huggingface.co/facebook/bart-large-cnn) and [Replicate](https://replicate.com/meta/meta-llama-3-8b-instruct) are utilized in this project. You need to connect to the internet while using it.
 
 3. Set up a `.env` file in the project root to include the required API token. In the `.env` file, include the following line:
 
-```
-REPLICATE_API_TOKEN=your_secret_key
-```
+   ```
+   REPLICATE_API_TOKEN=your_secret_key
+   ```
 
 Make sure to replace `your_secret_key` with your actual API token.
 The program will still run without the API token, but some features may not function properly.
