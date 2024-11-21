@@ -10,10 +10,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 
 export default function KeywordExtraction() {
   const [text, setText] = useState("");
   const [keywords, setKeywords] = useState<string[]>([]);
+  const [numKeywords, setNumKeywords] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -35,7 +44,7 @@ export default function KeywordExtraction() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, num_keywords: numKeywords }),
       });
 
       if (!response.ok) {
@@ -70,6 +79,26 @@ export default function KeywordExtraction() {
             rows={10}
             className="mb-4"
           />
+          <div className="mb-4">
+            <Label htmlFor="num-keywords" className="mb-2 block">
+              Number of Keywords
+            </Label>
+            <Select
+              value={numKeywords.toString()}
+              onValueChange={(value) => setNumKeywords(parseInt(value, 10))}
+            >
+              <SelectTrigger id="num-keywords" className="w-[180px]">
+                <SelectValue placeholder="Select number of keywords" />
+              </SelectTrigger>
+              <SelectContent>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                  <SelectItem key={num} value={num.toString()}>
+                    {num}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
           {error && (
             <Alert variant="destructive" className="mb-4">
               <AlertDescription>{error}</AlertDescription>

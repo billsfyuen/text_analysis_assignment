@@ -21,11 +21,12 @@ def api_extract_keywords():
         return jsonify({'error': 'Invalid input.'}), 400
     
     text = data['text']
+    num_keywords = data['num_keywords']
     
     if not isinstance(text, str) or not text.strip():
         return jsonify({'error': 'text must be non-empty'}), 400
     
-    keywords = extract_keywords(text)
+    keywords = extract_keywords(text, num_keywords)
     return jsonify({'keywords': keywords})
 
 @app.route('/summarize_text', methods=['POST'])

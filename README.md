@@ -1,12 +1,12 @@
 # AI Text Analysis Assignment
 
-This is a code assignment developed by Bill YUEN for a job interview.
+This is a coding assignment developed by Bill YUEN for a job interview.
 
 ## Features
 
 - Keyword Extraction: Identifies and extracts the most important keywords or phrases from a text.
 - Text Summarization: Generates a concise summary of a longer text.
-- Topic Classification: Categorizes the text into predefined topics (e.g. sports, politics, technology, entertainment).
+- Topic Classification: Categorizes the text into predefined topics (e.g., sports, politics, technology, entertainment).
 
 ## Project Structure
 
@@ -14,6 +14,19 @@ This is a code assignment developed by Bill YUEN for a job interview.
 2. Frontend (Next.js)
 
 ## Setup and Installation
+
+### Pre-installation
+
+1. Models from Hugging Face and Replicate are utilized in this project. You need to connect to the internet while using it.
+
+2. Set up a .env file in the project root to include the required API token. In the `.env` file, include the following line:
+
+```
+REPLICATE_API_TOKEN=your_secret_key
+```
+
+Make sure to replace `your_secret_key` with your actual API token.
+The program will still run without the API token, but some features may not function properly.
 
 ### Backend
 
@@ -68,23 +81,11 @@ The frontend will be accessible at `http://localhost:3000`.
 ## Usage
 
 1. Open your web browser and go to `http://localhost:3000`.
-2. Choose an analyzing option.
+2. Choose an analysis option.
 3. Enter the text you want to analyze in the provided text area and click the button.
 4. The system will display the extracted keywords, text summary, and classified topic.
 
 ## Customization
 
 1. The number of keywords (for Keyword Extraction) and the list of predefined topics (for Topic Classification) can be customized
-2. Simply make updates in `backend/helpers/customize.py`
-
-## Additional Information
-
-1. Models from Hugging Face and Replicate are utilized in this project. You need to connect to the internet while using it.
-
-2. Set up a .env file in the project root to use the required API token. In the .env file, include the following line:
-
-```
-REPLICATE_API_TOKEN=your_secret_key
-```
-
-Make sure to replace `your_secret_key` with your actual API token.
+2. Simply make updates in `backend/helpers/customize.py`.
